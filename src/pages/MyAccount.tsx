@@ -1,12 +1,19 @@
 import { useNavigate } from "react-router-dom";
+import { useCurrentUser } from "../hooks/useCurrentUser";
+import { Link } from "react-router-dom";
 
 export default function MyAccount(): JSX.Element {
   const navigate = useNavigate();
+  const { isLoading, isAuthorized, username } = useCurrentUser();
 
-  return (
+  if (isLoading) {
+    return <h2>Loading...</h2>;
+  }
+
+  const authorizedBody = (
     <div>
       <div>
-        <h1>My Account</h1>
+        <h1>Hi, {username}</h1>
       </div>
       <div>
         <ul>
@@ -46,4 +53,14 @@ export default function MyAccount(): JSX.Element {
       </div>
     </div>
   );
+
+  const unauthorizedBody = (
+    <>
+      You have not logged in and cannot view the dashboard.
+      <br />
+      <br />
+      <Link to="/">Login to continue.</Link>
+    </>
+  );
+  return <>{isAuthorized ? authorizedBody : unauthorizedBody}</>;
 }
