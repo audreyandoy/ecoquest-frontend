@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import MyAccount from "./pages/MyAccount";
 import ResponsiveAppBar from "./components/NavBar";
-import Explore from "./pages/Explore";
+import Quests from "./pages/Quests";
 
 const App = () => {
   return (
@@ -30,7 +30,7 @@ const Root = () => {
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="my-account" element={<MyAccount />} />
-            <Route path="explore" element={<Explore />} />
+            <Route path="quests" element={<Quests />} />
           </Routes>
         </div>
       </BrowserRouter>

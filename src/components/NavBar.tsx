@@ -12,9 +12,8 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-const pages = ["Quests", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
@@ -46,8 +45,7 @@ function ResponsiveAppBar() {
       position="static"
       sx={{
         width: "100%",
-        backgroundColor: "#698C8A",
-
+        backgroundColor: "#73BB25",
         paddingLeft: 0,
         paddingRight: 0,
       }}
@@ -103,7 +101,7 @@ function ResponsiveAppBar() {
               display: { xs: "block", md: "none" },
             }}
           >
-            <MenuItem
+            {/* <MenuItem
               component={NavLink}
               to="/my-account"
               onClick={handleCloseNavMenu}
@@ -112,11 +110,11 @@ function ResponsiveAppBar() {
             </MenuItem>
             <MenuItem
               component={NavLink}
-              to="/explore"
+              to="/quests"
               onClick={handleCloseNavMenu}
             >
               Create New Map
-            </MenuItem>
+            </MenuItem> */}
           </Menu>
         </Box>
         <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -152,7 +150,7 @@ function ResponsiveAppBar() {
           </Button>
           <Button
             component={NavLink}
-            to="/explore"
+            to="/quests"
             sx={{
               marginTop: "auto",
               marginBottom: "auto",
