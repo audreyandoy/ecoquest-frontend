@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import MyAccount from "./pages/MyAccount";
-import Navbar from "./components/NavBar";
+import ResponsiveAppBar from "./components/NavBar";
 import Explore from "./pages/Explore";
 
 const App = () => {
@@ -17,7 +17,6 @@ const App = () => {
         transport Reduce the heating in your home by 2-3 degrees F Spend 2 fewer
         minutes in the shower etc
       </p>
-      <Navbar />
     </>
   );
 };
@@ -26,11 +25,14 @@ const Root = () => {
   return (
     <React.StrictMode>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="my-account" element={<MyAccount />} />
-          <Route path="explore" element={<Explore />} />
-        </Routes>
+        <ResponsiveAppBar />
+        <div>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="my-account" element={<MyAccount />} />
+            <Route path="explore" element={<Explore />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </React.StrictMode>
   );
