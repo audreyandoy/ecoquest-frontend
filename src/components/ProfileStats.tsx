@@ -29,9 +29,11 @@ function ProfileStats({profileInfo}) {
     <>
     <h1>Stats</h1>
       <div>
-        <h2>Streak Record: {profile_streak()} days</h2>
-        <h2>Points: {profileInfo.total_points} pts</h2>
-        <h2>Carbon Emissions Reduced: {profileInfo.total_co2e_reduced}</h2>
+        <ul>
+          <li><h3>Streak Record: {profile_streak()} days</h3></li>
+          <li><h3>Points: <b>{profileInfo.total_points}</b> pts</h3></li>
+          <li><h3>Carbon Emissions Reduced: <b>{profileInfo.total_co2e_reduced}</b></h3></li>
+        </ul>
       </div>
     </>
   );
