@@ -1,4 +1,6 @@
 import { Navigate } from "react-router-dom";
+
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -18,6 +20,7 @@ function ProfileStats() {
 
   return (
     <>
+    <h1>Stats</h1>
       <div>
         <h2>Streak Record 5 day</h2>
         <h2>Points: 600 pts</h2>
