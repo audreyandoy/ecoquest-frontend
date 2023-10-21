@@ -1,49 +1,76 @@
 import { useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+// import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
+import { styled } from "@mui/material/styles";
+// import Button from "@mui/material/Button";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+
+import ProfileStats from "../components/ProfileStats";
+import Achievements from "../components/Achievements";
+import Garden from "../components/Garden";
 
 export default function MyAccount(): JSX.Element {
   const navigate = useNavigate();
 
+  const [profileInfo, setProfileInfo] = useState({});
+
+  const getProfileInfo = () => {
+    axios.get(`http://127.0.0.1:8000/api/eco-profile/1`).then((res) => {
+      console.log(res.data);
+      setProfileInfo(res.data);
+    });
+  };
+
+  useEffect(() => {
+    getProfileInfo();
+  }, []);
+
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(4),
+    textAlign: "left",
+    color: theme.palette.text.secondary,
+    height: "80%"
+  }));
+
   return (
-    <div>
-      <div>
-        <h1>My Account</h1>
-      </div>
-      <div>
-        <ul>
-          <li>
-            Monthly Quest: made up of multiple challenges and the users progress
-            towards it
-          </li>
-          <li>
-            Daily quest: made up of 2-3 challenges and the users progress
-            towards it.
-          </li>
-          <li>Statistics:</li>
-          <ul>
-            <li>
-              Streak info - number of days in a row that challenges were
-              completed
-            </li>
-            <li>In-app points - leaves could be a fun depiction of points</li>
-            <li>
-              Level: based on reaching a certain number of in-app points. I
-              haven't come up with a great name for these! Something nature
-              related would be great!{" "}
-            </li>
-            <li>
-              Achievements: reached by accomplishing certain goals, for example
-            </li>
-            <ul>
-              <li>
-                Weekend warrior: completed daily challenge on sat and sunday
-              </li>
-              <li>Champion: Made it to the diamond level</li>
-              <li>Quest champ: completed 50 daily quests</li>
-              <li>Legendary: complete a 365 day streak</li>
-            </ul>
-          </ul>
-        </ul>
-      </div>
-    </div>
+    <>
+      <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        padding: "0 80px",
+      }}
+    >
+      <Grid container spacing={2}>
+
+        <Grid item xs={6}>
+          <Item>
+            <ProfileStats profileInfo={profileInfo}></ProfileStats>
+          </Item>
+        </Grid>
+        <Grid item xs={6}>
+          <Item>
+            <Achievements></Achievements>
+          </Item>
+        </Grid>
+        <Grid item xs={12}>
+          <Item>
+            <Garden></Garden>
+          </Item>
+        </Grid>
+
+      </Grid>
+
+
+    </Box>
+    </>
   );
 }
