@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
+// import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 
 import ProfileStats from "../components/ProfileStats";
 import Achievements from "../components/Achievements";
@@ -12,6 +15,19 @@ import Garden from "../components/Garden";
 
 export default function MyAccount(): JSX.Element {
   const navigate = useNavigate();
+
+  const [profileInfo, setProfileInfo] = useState({});
+
+  const getProfileInfo = () => {
+    axios.get(`http://127.0.0.1:8000/api/eco-profile/1`).then((res) => {
+      console.log(res.data);
+      setProfileInfo(res.data);
+    });
+  };
+
+  useEffect(() => {
+    getProfileInfo();
+  }, []);
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -37,7 +53,7 @@ export default function MyAccount(): JSX.Element {
 
         <Grid item xs={6}>
           <Item>
-            <ProfileStats></ProfileStats>
+            <ProfileStats profileInfo={profileInfo}></ProfileStats>
           </Item>
         </Grid>
         <Grid item xs={6}>
