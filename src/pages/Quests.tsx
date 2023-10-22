@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import ActivityLog from "../components/ActivityLog";
 import TransportForm from "../components/TransportForm";
+import MealsForm from "../components/MealsForm";
 import {
   Dialog,
   DialogTitle,
@@ -12,6 +12,7 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
+import Box from "@mui/material/Box";
 
 type HandleFormSubmit = (
   values: { dropdown: string; distance: string },
@@ -96,7 +97,22 @@ export default function Quests() {
               </Dialog>
             </div>
             <div style={circleStyles}>
-              <div>Eat Less Meat</div>
+              <button onClick={handleOpen}>
+                <div style={transparentBoxStyles}>
+                  Eat Less Meat
+                </div>
+              </button>
+              {/* <div>Eat Less Meat</div> */}
+              <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Meal Form</DialogTitle>
+                <DialogContent>
+                  <MealsForm />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose}>Cancel</Button>
+                  <Button onClick={handleClose}>Submit</Button>
+                </DialogActions>
+              </Dialog>
             </div>
             <div style={circleStyles}>
               <div>Learn about Sustainable Practices</div>
@@ -113,6 +129,7 @@ export default function Quests() {
         <Item>
           <h1>Quest Log</h1>
           <ActivityLog />
+          
         </Item>
       </Stack>
     </Box>
