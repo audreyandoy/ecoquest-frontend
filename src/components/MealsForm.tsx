@@ -10,6 +10,7 @@ const MealForm = ({ onSubmit }) => {
     const handleSubmit = async (values: { dropdown: string; }) => {
         try {
             const ecoMeals = {
+                user: 1, // TODO: extract user id
                 eco_breakfast: false,
                 eco_lunch: false,
                 eco_dinner: false,
@@ -18,12 +19,12 @@ const MealForm = ({ onSubmit }) => {
             if (values.dropdown === "option1") {
                 ecoMeals.eco_breakfast = true;
             } else if (values.dropdown === "option2") {
-                ecoMeals.eco_lunch = true; 
+                ecoMeals.eco_lunch = true;
             } else if (values.dropdown === "option3") {
                 ecoMeals.eco_dinner = true;
             } 
 
-            const response = await axios.post("/api/eco-meals", ecoMeals);
+            const response = await axios.post("http://127.0.0.1:8000/api/eco-meals", ecoMeals);
 
             console.log("Response:", response.data);
 

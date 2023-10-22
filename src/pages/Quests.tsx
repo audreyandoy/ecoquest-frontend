@@ -48,15 +48,25 @@ const transparentBoxStyles: React.CSSProperties = {
 };
 
 export default function Quests() {
-  const [open, setOpen] = useState(false);
+  const [ecoTransportFormOpen, setEcoTransportFormOpen] = useState(false);
+  const [ecoMealFormOpen, setEcoMealFormOpen] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
+  const handleEcoTransportFormOpen = () => {
+    setEcoTransportFormOpen(true)
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleEcoTransportFormClose = () => {
+    setEcoTransportFormOpen(false);
   };
+
+  const handleEcoMealFormOpen = () => {
+    setEcoMealFormOpen(true);
+  };
+
+  const handleEcoMealFormClose = () => {
+    setEcoMealFormOpen(false);
+  };
+
 
   const handleFormSubmit: HandleFormSubmit = (values, actions) => {
     // axios POST call here to post activitiy to backend
@@ -80,37 +90,37 @@ export default function Quests() {
           <h1>Quests</h1>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
             <div style={circleStyles}>
-              <button onClick={handleOpen}>
+              <button onClick={handleEcoTransportFormOpen}>
                 <div style={transparentBoxStyles}>
                   Eco-Friendly Transportation
                 </div>
               </button>
-              <Dialog open={open} onClose={handleClose}>
+              <Dialog open={ecoTransportFormOpen} onClose={handleEcoTransportFormClose}>
                 <DialogTitle>Transportation Form</DialogTitle>
                 <DialogContent>
                   <TransportForm />
                 </DialogContent>
                 <DialogActions>
-                  <Button onClick={handleClose}>Cancel</Button>
-                  <Button onClick={handleClose}>Submit</Button>
+                  <Button onClick={handleEcoTransportFormClose}>Cancel</Button>
+                  <Button onClick={handleEcoTransportFormClose}>Submit</Button>
                 </DialogActions>
               </Dialog>
             </div>
             <div style={circleStyles}>
-              <button onClick={handleOpen}>
+              <button onClick={handleEcoMealFormOpen}>
                 <div style={transparentBoxStyles}>
                   Eat Less Meat
                 </div>
               </button>
               {/* <div>Eat Less Meat</div> */}
-              <Dialog open={open} onClose={handleClose}>
+              <Dialog open={ecoMealFormOpen} onClose={handleEcoMealFormClose}>
                 <DialogTitle>Meal Form</DialogTitle>
                 <DialogContent>
                   <MealsForm />
                 </DialogContent>
                 <DialogActions>
-                  <Button onClick={handleClose}>Cancel</Button>
-                  <Button onClick={handleClose}>Submit</Button>
+                  <Button onClick={handleEcoMealFormClose}>Cancel</Button>
+                  <Button onClick={handleEcoMealFormClose}>Submit</Button>
                 </DialogActions>
               </Dialog>
             </div>
