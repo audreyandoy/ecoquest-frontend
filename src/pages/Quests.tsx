@@ -1,7 +1,9 @@
+
 import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
+import Button from "@mui/material/Button";
 import ActivityLog from "../components/ActivityLog";
 import TransportForm from "../components/TransportForm";
 import MealsForm from "../components/MealsForm";
@@ -19,6 +21,7 @@ type HandleFormSubmit = (
   actions: any
 ) => void;
 
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -35,19 +38,15 @@ const circleStyles: React.CSSProperties = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: "#73BB25", // Set the background color of the circle
-  color: "#fff", // Text color
+  backgroundColor: "#73BB25",
+  color: "#fff",
   fontSize: "20px",
   cursor: "pointer",
   textAlign: "center",
 };
 
-const transparentBoxStyles: React.CSSProperties = {
-  background: "transparent", // Set the background of the inner box to transparent
-  padding: "20px", // Adjust padding as needed
-};
-
 export default function Quests() {
+
   const [ecoTransportFormOpen, setEcoTransportFormOpen] = useState(false);
   const [ecoMealFormOpen, setEcoMealFormOpen] = useState(false);
 
@@ -90,6 +89,7 @@ export default function Quests() {
           <h1>Quests</h1>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
             <div style={circleStyles}>
+
               <button onClick={handleEcoTransportFormOpen}>
                 <div style={transparentBoxStyles}>
                   Eco-Friendly Transportation
@@ -105,6 +105,7 @@ export default function Quests() {
                   <Button onClick={handleEcoTransportFormClose}>Submit</Button>
                 </DialogActions>
               </Dialog>
+              <div>Eco Friendly Transportation</div>
             </div>
             <div style={circleStyles}>
               <button onClick={handleEcoMealFormOpen}>
@@ -134,7 +135,12 @@ export default function Quests() {
           elit. Provident ipsa voluptas temporibus aliquam distinctio, possimus
           vero nisi unde nemo, cumque, tempora aperiam quos adipisci ut quam
           beatae quas consectetur minus. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Provident ipsa voluptas temporibus aliquam.
+          adipisicing elit. Provident ipsa voluptas temporibus aliquam
+          distinctio, possimus vero nisi unde nemo, cumque, tempora aperiam quos
+          adipisci ut quam beatae quas consectetur minus. Lorem ipsum dolor sit
+          amet consectetur adipisicing elit. Provident ipsa voluptas temporibus
+          aliquam distinctio, possimus vero nisi unde nemo, cumque, tempora
+          aperiam quos adipisci ut quam beatae quas consectetur minus.
         </Item>
         <Item>
           <h1>Quest Log</h1>

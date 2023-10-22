@@ -7,6 +7,7 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Box from "@mui/material/Box";
 
 
 import ProfileStats from "../components/ProfileStats";
