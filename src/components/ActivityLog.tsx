@@ -16,12 +16,30 @@ function ActivityLog() {
     getTransportationActivities();
   }, []);
 
+  // const getMealActivities = () => {
+  //   axios.get(`http://127.0.0.1:8000/api/eco-meals`).then((res) => {
+  //     console.log(res.data);
+  //     setActivityList(res.data);
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   getMealActivities();
+  // }, []);
+
   return (
     <>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {activityList.map((act, index) => (
           <div key={index} style={{ flexBasis: "33.33%", padding: "8px" }}>
             {act.activity_date}: {act.activity} {act.distance} miles
+          </div>
+        ))}
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {activityList.map((act, index) => (
+          <div key={index} style={{ flexBasis: "33.33%", padding: "8px" }}>
+            {act.activity_date}: {act.meal_type} 
           </div>
         ))}
       </div>
