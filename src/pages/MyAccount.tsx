@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 // import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
@@ -7,6 +6,7 @@ import { styled } from "@mui/material/styles";
 // import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Box from "@mui/material/Box";
 
 
 import ProfileStats from "../components/ProfileStats";
