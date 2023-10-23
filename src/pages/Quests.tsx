@@ -1,5 +1,5 @@
+import React, { useState, useEffect } from "react";
 
-import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
@@ -7,6 +7,8 @@ import ActivityLog from "../components/ActivityLog";
 import TransportForm from "../components/TransportForm";
 import MealsForm from "../components/MealsForm";
 import EducationForm from "../components/EducationForm";
+import axios from "axios";
+
 import {
   Dialog,
   DialogTitle,
@@ -16,11 +18,10 @@ import {
 } from "@mui/material";
 import Box from "@mui/material/Box";
 
-type HandleFormSubmit = (
-  values: { dropdown: string; distance: string },
-  actions: any
-) => void;
-
+// type HandleFormSubmit = (
+//   values: { dropdown: string; distance: string },
+//   actions: any
+// ) => void;
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -46,13 +47,13 @@ const circleStyles: React.CSSProperties = {
 };
 
 export default function Quests() {
-
   const [ecoTransportFormOpen, setEcoTransportFormOpen] = useState(false);
   const [ecoMealFormOpen, setEcoMealFormOpen] = useState(false);
   const [ecoEducationFormOpen, setEcoEducationFormOpen] = useState(false);
+  const [text, setText] = useState("");
 
   const handleEcoTransportFormOpen = () => {
-    setEcoTransportFormOpen(true)
+    setEcoTransportFormOpen(true);
   };
 
   const handleEcoTransportFormClose = () => {
@@ -73,15 +74,29 @@ export default function Quests() {
 
   const handleEcoEducationFormClose = () => {
     setEcoEducationFormOpen(false);
+    const response = axios.post(`http://127.0.0.1:8000/api/eco-education`, {
+      'text': text, 
+      'user': 1
+    });
+    console.log("logged to db.")
   };
 
+  const getEducationText = () => {
+    axios.get(`http://127.0.0.1:8000/api/eco-education-text/1`).then((res) => {
+        console.log(res.data);
+        setText(res.data);
+      });
+}
 
   const handleFormSubmit: HandleFormSubmit = (values, actions) => {
     // axios POST call here to post activitiy to backend
-
     actions.resetForm();
     setFormVisible(false);
   };
+
+  useEffect(() => {
+    getEducationText();
+}, []);
 
   return (
     <Box
@@ -89,8 +104,8 @@ export default function Quests() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
         padding: "0 130px",
+        marginTop: "70px",
       }}
     >
       <Stack spacing={2}>
@@ -98,28 +113,22 @@ export default function Quests() {
           <h1>Quests</h1>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
             <div style={circleStyles}>
-
               <button onClick={handleEcoTransportFormOpen}>
-                <div>
-                  Eco-Friendly Transportation
-                </div>
+                <div>Eco-Friendly Transportation</div>
               </button>
-              <Dialog open={ecoTransportFormOpen} onClose={handleEcoTransportFormClose}>
+              <Dialog
+                open={ecoTransportFormOpen}
+                onClose={handleEcoTransportFormClose}
+              >
                 <DialogTitle>Transportation Form</DialogTitle>
                 <DialogContent>
                   <TransportForm />
                 </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleEcoTransportFormClose}>Cancel</Button>
-                  <Button onClick={handleEcoTransportFormClose}>Submit</Button>
-                </DialogActions>
               </Dialog>
             </div>
             <div style={circleStyles}>
               <button onClick={handleEcoMealFormOpen}>
-                <div>
-                  Eat Less Meat
-                </div>
+                <div>Eat Less Meat</div>
               </button>
               {/* <div>Eat Less Meat</div> */}
               <Dialog open={ecoMealFormOpen} onClose={handleEcoMealFormClose}>
@@ -142,7 +151,7 @@ export default function Quests() {
               <Dialog open={ecoEducationFormOpen} onClose={handleEcoEducationFormClose}>
                 <DialogTitle>Education Form</DialogTitle>
                 <DialogContent>
-                  <EducationForm/>
+                  <EducationForm text={text}/>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleEcoEducationFormClose}>Cancel</Button>
@@ -167,7 +176,6 @@ export default function Quests() {
         <Item>
           <h1>Quest Log</h1>
           <ActivityLog />
-          
         </Item>
       </Stack>
     </Box>

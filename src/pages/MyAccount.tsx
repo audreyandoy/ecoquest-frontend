@@ -25,6 +25,14 @@ export default function MyAccount(): JSX.Element {
     });
   };
 
+  const getEducationText = () => {
+    axios.get(`http://127.0.0.1:8000/api/eco-education-text/1`).then((res) => {
+        console.log(res.data);
+        setText(res.data);
+      });
+}
+
+
   useEffect(() => {
     getProfileInfo();
   }, []);
