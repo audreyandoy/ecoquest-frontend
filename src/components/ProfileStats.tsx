@@ -21,7 +21,7 @@ function ProfileStats({profileInfo}) {
   const profile_streak = () => {
     const streak = profileInfo.streak 
     if (streak == null) {
-      return 0
+      return 1
     }
   }
 

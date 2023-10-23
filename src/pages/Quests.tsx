@@ -8,6 +8,7 @@ import TransportForm from "../components/TransportForm";
 import MealsForm from "../components/MealsForm";
 import EducationForm from "../components/EducationForm";
 import axios from "axios";
+import Grid from "@mui/material/Grid";
 
 import {
   Dialog,
@@ -17,6 +18,11 @@ import {
   Button,
 } from "@mui/material";
 import Box from "@mui/material/Box";
+
+
+import ProfileStats from "../components/ProfileStats";
+import Achievements from "../components/Achievements";
+import Garden from "../components/Garden";
 
 // type HandleFormSubmit = (
 //   values: { dropdown: string; distance: string },
@@ -51,12 +57,14 @@ export default function Quests() {
   const [ecoMealFormOpen, setEcoMealFormOpen] = useState(false);
   const [ecoEducationFormOpen, setEcoEducationFormOpen] = useState(false);
   const [text, setText] = useState("");
+  const [profileInfo, setProfileInfo] = useState({});
 
   const handleEcoTransportFormOpen = () => {
     setEcoTransportFormOpen(true);
   };
 
   const handleEcoTransportFormClose = () => {
+    getProfileInfo();
     setEcoTransportFormOpen(false);
   };
 
@@ -65,19 +73,21 @@ export default function Quests() {
   };
 
   const handleEcoMealFormClose = () => {
+    getProfileInfo();
     setEcoMealFormOpen(false);
   };
 
   const handleEcoEducationFormOpen = () => {
     setEcoEducationFormOpen(true);
   };
-
+  
   const handleEcoEducationFormClose = () => {
     setEcoEducationFormOpen(false);
     const response = axios.post(`http://127.0.0.1:8000/api/eco-education`, {
       'text': text, 
       'user': 1
     });
+    getProfileInfo();
     console.log("logged to db.")
   };
 
@@ -94,7 +104,17 @@ export default function Quests() {
     setFormVisible(false);
   };
 
+
+  const getProfileInfo = () => {
+    axios.get(`http://127.0.0.1:8000/api/eco-profile/1`).then((res) => {
+      console.log(res.data);
+      setProfileInfo(res.data);
+    });
+  };
+
+  
   useEffect(() => {
+    getProfileInfo();
     getEducationText();
 }, []);
 
@@ -162,16 +182,26 @@ export default function Quests() {
           </div>
         </Item>
         <Item>
-          <h1>EcoQuests</h1>I Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Provident ipsa voluptas temporibus aliquam distinctio, possimus
-          vero nisi unde nemo, cumque, tempora aperiam quos adipisci ut quam
-          beatae quas consectetur minus. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Provident ipsa voluptas temporibus aliquam
-          distinctio, possimus vero nisi unde nemo, cumque, tempora aperiam quos
-          adipisci ut quam beatae quas consectetur minus. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Provident ipsa voluptas temporibus
-          aliquam distinctio, possimus vero nisi unde nemo, cumque, tempora
-          aperiam quos adipisci ut quam beatae quas consectetur minus.
+        <Grid container spacing={2}>
+
+            <Grid item xs={6}>
+              <Item style={{boxShadow: "none"}}>
+                <ProfileStats profileInfo={profileInfo}></ProfileStats>
+              </Item>
+            </Grid>
+            <Grid item xs={6}>
+              <Item style={{boxShadow: "none"}}>
+                <Achievements></Achievements>
+              </Item>
+            </Grid>
+            {/* <Grid item xs={12}>
+              <Item>
+                <Garden></Garden>
+              </Item>
+            </Grid> */}
+
+        </Grid>
+
         </Item>
         <Item>
           <h1>Quest Log</h1>

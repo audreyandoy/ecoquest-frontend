@@ -12,19 +12,21 @@ function ActivityLog() {
     });
   };
 
-  useEffect(() => {
-    getTransportationActivities();
-  }, []);
-
   // const getMealActivities = () => {
   //   axios.get(`http://127.0.0.1:8000/api/eco-meals`).then((res) => {
   //     console.log(res.data);
-  //     setActivityList(res.data);
+  //     new_list = [...activityList]
+  //     res.data.map((item) => )
+  //     setActivityList([...activityList]);
   //   });
   // };
+  useEffect(() => {
+    getTransportationActivities();
+      // getMealActivities();
+  }, []);
+
 
   // useEffect(() => {
-  //   getMealActivities();
   // }, []);
 
   return (
@@ -36,13 +38,13 @@ function ActivityLog() {
           </div>
         ))}
       </div>
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+      {/* <div style={{ display: "flex", flexWrap: "wrap" }}>
         {activityList.map((act, index) => (
           <div key={index} style={{ flexBasis: "33.33%", padding: "8px" }}>
             {act.activity_date}: {act.meal_type} 
           </div>
         ))}
-      </div>
+      </div> */}
     </>
   );
 }
