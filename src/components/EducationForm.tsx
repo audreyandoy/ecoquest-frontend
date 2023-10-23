@@ -1,13 +1,27 @@
+import { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 
-const EducationForm = ({ onSubmit, chatGPTText }) => {
-//   const validationSchema = Yup.object({
-    
-//     distance: Yup.number()
-//       .typeError("Distance must be a number")
-//       .required("Distance is required"),
-//   });
+
+const EducationForm = ({ onSubmit }) => {
+
+    const [text, setText] = useState("");
+
+    const getEducationText = () => {
+        axios.get(`http://127.0.0.1:8000/api/eco-education-text/1`).then((res) => {
+            console.log(res.data);
+            setText(res.data);
+          });
+    }
+
+    // const handleSubmit = async () => {
+    //     const response = await axios.post()
+    // }
+
+    useEffect(() => {
+        getEducationText();
+    }, []);
 
   return (
     <Formik
@@ -16,7 +30,7 @@ const EducationForm = ({ onSubmit, chatGPTText }) => {
       onSubmit={onSubmit}
     >
       <Form>
-        {chatGPTText}
+        {text.text}
         <div>
           <button type="submit">Submit</button>
         </div>

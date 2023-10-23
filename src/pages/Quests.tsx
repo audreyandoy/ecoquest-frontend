@@ -142,7 +142,7 @@ export default function Quests() {
               <Dialog open={ecoEducationFormOpen} onClose={handleEcoEducationFormClose}>
                 <DialogTitle>Education Form</DialogTitle>
                 <DialogContent>
-                  <EducationForm chatGPTText={"hi"}/>
+                  <EducationForm/>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleEcoEducationFormClose}>Cancel</Button>
