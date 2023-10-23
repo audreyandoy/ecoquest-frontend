@@ -84,7 +84,8 @@ export default function Quests() {
   const handleEcoEducationFormClose = () => {
     setEcoEducationFormOpen(false);
     const response = axios.post(`http://127.0.0.1:8000/api/eco-education`, {
-      'text': text, 
+      'points': 5,
+      'text': text.text.substring(0,1999), 
       'user': 1
     });
     getProfileInfo();
