@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles";
 import ActivityLog from "../components/ActivityLog";
 import TransportForm from "../components/TransportForm";
 import MealsForm from "../components/MealsForm";
+import EducationForm from "../components/EducationForm";
 import {
   Dialog,
   DialogTitle,
@@ -48,6 +49,7 @@ export default function Quests() {
 
   const [ecoTransportFormOpen, setEcoTransportFormOpen] = useState(false);
   const [ecoMealFormOpen, setEcoMealFormOpen] = useState(false);
+  const [ecoEducationFormOpen, setEcoEducationFormOpen] = useState(false);
 
   const handleEcoTransportFormOpen = () => {
     setEcoTransportFormOpen(true)
@@ -63,6 +65,14 @@ export default function Quests() {
 
   const handleEcoMealFormClose = () => {
     setEcoMealFormOpen(false);
+  };
+
+  const handleEcoEducationFormOpen = () => {
+    setEcoEducationFormOpen(true);
+  };
+
+  const handleEcoEducationFormClose = () => {
+    setEcoEducationFormOpen(false);
   };
 
 
@@ -104,7 +114,6 @@ export default function Quests() {
                   <Button onClick={handleEcoTransportFormClose}>Submit</Button>
                 </DialogActions>
               </Dialog>
-              <div>Eco Friendly Transportation</div>
             </div>
             <div style={circleStyles}>
               <button onClick={handleEcoMealFormOpen}>
@@ -125,7 +134,21 @@ export default function Quests() {
               </Dialog>
             </div>
             <div style={circleStyles}>
-              <div>Learn about Sustainable Practices</div>
+              <button onClick={handleEcoEducationFormOpen}>
+                <div>
+                  Learn something new!
+                </div>
+              </button>
+              <Dialog open={ecoEducationFormOpen} onClose={handleEcoEducationFormClose}>
+                <DialogTitle>Education Form</DialogTitle>
+                <DialogContent>
+                  <EducationForm chatGPTText={"hi"}/>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleEcoEducationFormClose}>Cancel</Button>
+                  <Button onClick={handleEcoEducationFormClose}>Submit</Button>
+                </DialogActions>
+              </Dialog>
             </div>
           </div>
         </Item>
