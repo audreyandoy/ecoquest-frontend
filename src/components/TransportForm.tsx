@@ -1,35 +1,64 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import React, { useState } from "react";
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 
 const TransportForm = ({ onSubmit }) => {
   const validationSchema = Yup.object({
-    dropdown: Yup.string().required("Dropdown is required"),
     distance: Yup.number()
       .typeError("Distance must be a number")
       .required("Distance is required"),
   });
 
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (
+    values: { activity: string; distance: string },
+    actions: FormikHelpers<{ activity: string; distance: string }>
+  ) => {
+    setSubmitting(true);
+    try {
+      const requestData = {
+        activity: values.activity,
+        distance: parseFloat(values.distance),
+        user: 1,
+      };
+      console.log(requestData);
+
+      await axios.post(`http://127.0.0.1:8000/api/eco-transport`, requestData);
+      onSubmit();
+
+      actions.resetForm();
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <Formik
       initialValues={{ dropdown: "", distance: "" }}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}
+      onSubmit={(values, actions) => {
+        handleSubmit(values, actions);
+      }}
     >
       <Form>
         <div>
           <label htmlFor="dropdown">Dropdown:</label>
           <Field
             as="select"
-            id="dropdown"
-            name="dropdown"
+            id="activity"
+            name="activity"
             placeholder="Select option"
           >
             <option value="" disabled>
               Select an option
             </option>
-            <option value="option1">Walk</option>
-            <option value="option2">Bike</option>
-            <option value="option3">Bus</option>
+            <option value="Walk">Walk</option>
+            <option value="Bike">Bike</option>
+            <option value="Bus">Bus</option>
           </Field>
           <ErrorMessage name="dropdown" component="div" className="error" />
         </div>
@@ -44,7 +73,9 @@ const TransportForm = ({ onSubmit }) => {
           <ErrorMessage name="distance" component="div" className="error" />
         </div>
         <div>
-          <button type="submit">Submit</button>
+          <button type="submit" disabled={submitting}>
+            Submit
+          </button>
         </div>
       </Form>
     </Formik>

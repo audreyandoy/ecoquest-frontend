@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
@@ -15,11 +14,10 @@ import {
 } from "@mui/material";
 import Box from "@mui/material/Box";
 
-type HandleFormSubmit = (
-  values: { dropdown: string; distance: string },
-  actions: any
-) => void;
-
+// type HandleFormSubmit = (
+//   values: { dropdown: string; distance: string },
+//   actions: any
+// ) => void;
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -45,12 +43,11 @@ const circleStyles: React.CSSProperties = {
 };
 
 export default function Quests() {
-
   const [ecoTransportFormOpen, setEcoTransportFormOpen] = useState(false);
   const [ecoMealFormOpen, setEcoMealFormOpen] = useState(false);
 
   const handleEcoTransportFormOpen = () => {
-    setEcoTransportFormOpen(true)
+    setEcoTransportFormOpen(true);
   };
 
   const handleEcoTransportFormClose = () => {
@@ -65,22 +62,14 @@ export default function Quests() {
     setEcoMealFormOpen(false);
   };
 
-
-  const handleFormSubmit: HandleFormSubmit = (values, actions) => {
-    // axios POST call here to post activitiy to backend
-
-    actions.resetForm();
-    setFormVisible(false);
-  };
-
   return (
     <Box
       sx={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
         padding: "0 130px",
+        marginTop: "70px",
       }}
     >
       <Stack spacing={2}>
@@ -88,29 +77,23 @@ export default function Quests() {
           <h1>Quests</h1>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
             <div style={circleStyles}>
-
               <button onClick={handleEcoTransportFormOpen}>
-                <div>
-                  Eco-Friendly Transportation
-                </div>
+                <div>Eco-Friendly Transportation</div>
               </button>
-              <Dialog open={ecoTransportFormOpen} onClose={handleEcoTransportFormClose}>
+              <Dialog
+                open={ecoTransportFormOpen}
+                onClose={handleEcoTransportFormClose}
+              >
                 <DialogTitle>Transportation Form</DialogTitle>
                 <DialogContent>
                   <TransportForm />
                 </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleEcoTransportFormClose}>Cancel</Button>
-                  <Button onClick={handleEcoTransportFormClose}>Submit</Button>
-                </DialogActions>
               </Dialog>
-              <div>Eco Friendly Transportation</div>
+              {/* <div>Eco Friendly Transportation</div> */}
             </div>
             <div style={circleStyles}>
               <button onClick={handleEcoMealFormOpen}>
-                <div>
-                  Eat Less Meat
-                </div>
+                <div>Eat Less Meat</div>
               </button>
               {/* <div>Eat Less Meat</div> */}
               <Dialog open={ecoMealFormOpen} onClose={handleEcoMealFormClose}>
@@ -144,7 +127,6 @@ export default function Quests() {
         <Item>
           <h1>Quest Log</h1>
           <ActivityLog />
-          
         </Item>
       </Stack>
     </Box>
