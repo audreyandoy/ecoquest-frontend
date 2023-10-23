@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
 import ActivityLog from "../components/ActivityLog";
 import TransportForm from "../components/TransportForm";
 import MealsForm from "../components/MealsForm";
@@ -91,7 +90,7 @@ export default function Quests() {
             <div style={circleStyles}>
 
               <button onClick={handleEcoTransportFormOpen}>
-                <div style={transparentBoxStyles}>
+                <div>
                   Eco-Friendly Transportation
                 </div>
               </button>
@@ -109,7 +108,7 @@ export default function Quests() {
             </div>
             <div style={circleStyles}>
               <button onClick={handleEcoMealFormOpen}>
-                <div style={transparentBoxStyles}>
+                <div>
                   Eat Less Meat
                 </div>
               </button>
